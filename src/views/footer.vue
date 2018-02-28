@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div id="one">
-      <router-link to='/'></router-link>
+      <router-link to='/index'></router-link>
       <span>星空</span>
     </div>
     <div id="two">
@@ -9,7 +9,7 @@
       <span>聊天</span>
     </div>
     <div id="three">
-      <router-link to='/userMessage'></router-link>
+      <router-link to='/user'></router-link>
       <span>个人</span>
     </div>
   </div>

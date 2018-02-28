@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="head">
-      <router-link to="_blank"></router-link>
+      <router-link to="/"></router-link>
       <p>排行榜</p>
       <div class="headimg">
         <div>
@@ -135,14 +135,14 @@
     height: 1.707rem;
     /*background-color: #ffffff;*/
     background: 
-      -webkit-linear-gradient(top left, transparent 0.572, #ffffff 0%),
-      -webkit-linear-gradient(bottom left, transparent 0.572, #f46c60 0%);
+      -webkit-linear-gradient(135deg, transparent 0.572rem, #ffffff 0),
+      -webkit-linear-gradient(45deg, transparent 0.572rem, #f46c60 0);
     background: 
-      -o-linear-gradient(top left, transparent 0.572, #ffffff 0%),
-      -o-linear-gradient(bottom left, transparent 0.572, #f46c60 0%);
+      -o-linear-gradient(135deg, transparent 0.572rem, #ffffff 0),
+      -o-linear-gradient(45deg, transparent 0.572rem, #f46c60 0);
     background: 
-      linear-gradient(to bottom right, transparent 0.572, #ffffff 0%),
-      linear-gradient(to top right, transparent 0.572, #f46c60 0%);
+      linear-gradient(135deg, transparent 0.572rem, #ffffff 0),
+      linear-gradient(45deg, transparent 0.572rem, #f46c60 0);
     display: flex;
     flex-direction: row;
     align-items: center; 

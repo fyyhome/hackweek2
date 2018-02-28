@@ -1,18 +1,8 @@
 <template>
   <div>
     <div class="biaoqian">
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
-      <p>啦啦啦啦</p>
+      <p v-for="item in user.label">{{item}}</p>
     </div>
-    <button>守护</button>
   </div>
 </template>
 
@@ -35,15 +25,20 @@
     line-height: 1;
     color: #5677fc;
   }
-  button{
-    display: block;
-    width: 8.933rem;
-    height: 1.6rem;
-    background-color: #5677fc;
-    border-radius: 0.2rem;
-    font-size: 0.48rem;
-    line-height: 1;
-    color: #ffffff;
-    margin: 0.534rem auto;
-  }
 </style>
+
+<script>
+  export default{
+    props:['id'],
+    data(){
+      return {
+        userId:this.id,
+        user:''
+      }
+    },
+    mounted(){
+      let list = JSON.parse(window.localStorage.data)
+      this.user = list.data[this.userId]
+    }
+  }
+</script>

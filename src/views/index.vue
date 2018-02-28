@@ -1,13 +1,13 @@
 <template>
   <div>
-    <router-link to="_blank" class="icon rank-list"></router-link>
-    <router-link to="_blank" class="icon xiao-xi"></router-link>
+    <router-link to="/rankList" class="icon rank-list"></router-link>
+    <router-link to="/xiaoxi" class="icon xiao-xi"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
-      <router-link to="_blank"></router-link>
-      <router-link to="_blank"></router-link>
-      <router-link to="_blank"></router-link>
-      <router-link to="_blank"></router-link>
-      <router-link to="_blank"></router-link>
+      <router-link to="{name:'ShouHu',params:{id:0}}"></router-link>
+      <router-link to="{name:'ShouHu',params:{id:1}}"></router-link>
+      <router-link to="{name:'ShouHu',params:{id:2}}"></router-link>
+      <router-link to="{name:'ShouHu',params:{id:3}}"></router-link>
+      <router-link to="{name:'ShouHu',params:{id:4}}"></router-link>
     </div>
     <footer-nav></footer-nav>
     <button class="shua-xin">换一批</button>
@@ -111,6 +111,10 @@
     },
     mounted(){
       setInterval(this.getTime,60000)
+      this.$http.get('').then((res)=>{
+        let list = JSON.stringify(res)
+        window.localStorage.setItem('data',list)
+      })
     }
   }
 </script>

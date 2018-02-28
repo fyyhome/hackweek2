@@ -1,10 +1,11 @@
 <template>
   <div>
-    <user-head></user-head>
-    <biao-qian></biao-qian>
+    <user-head :id="userId"></user-head>
+    <biao-qian :id="userId"></biao-qian>
+    <button class="shouhu" @click="shouhuFn">守护</button>
     <div class="overlay" v-show="overlay">
       <div class="lightbox">
-        <span>守护成功！</span>
+        <span>{{tip}}！</span>
         <button @click="showOverlay">确定</button>
       </div>
     </div>
@@ -12,6 +13,17 @@
 </template>
 
 <style scoped>
+  .shouhu{
+    display: block;
+    width: 8.933rem;
+    height: 1.6rem;
+    background-color: #5677fc;
+    border-radius: 0.2rem;
+    font-size: 0.48rem;
+    line-height: 1;
+    color: #ffffff;
+    margin: 0.534rem auto;
+  }
  .overlay{
   position: fixed;
   display: flex;
@@ -60,10 +72,23 @@
     },
     data(){
       return {
-        overlay:true
+        overlay:false,
+        userId:this.$route.params.id,
+        tip:'守护成功'
       }
     },
     methods:{
+      shouhuFn(){
+        this.$http.post('','startId=${this.userId}').then((res)=>{
+          if(res.code === 0){
+            this.overlay = true
+          }
+          else{
+            this.tip = res.message
+            this.overlay = true
+          }
+        })
+      },
       showOverlay(){
         this.overlay = false
       }

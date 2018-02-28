@@ -6,13 +6,14 @@ import Index from '../views/index.vue'
 import ShouHu from '../views/shouhu.vue'
 import RankList from '../views/rankList.vue'
 import XiaoXi from '../views/xiaoxi.vue'
+import User from '../views/user.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'Login',
       component: Login
     },
@@ -32,9 +33,20 @@ export default new Router({
       component: RankList
     },
     {
-      path: '/',
+      path: '/xiaoxi',
       name: 'XiaoXi',
       component: XiaoXi
+    },
+    {
+      // path: '/shouhu',
+      path: '/shouhu/:id',
+      name: 'ShouHu',
+      component: ShouHu
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: User
     }
   ]
 })

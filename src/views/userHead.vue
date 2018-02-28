@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="big-head">
-      <router-link to=""></router-link>
+      <router-link to="/index"></router-link>
+      <img class="bg-blur" src="user.avatar">
       <div class="small-head">
-        <img src="../assets/images/fanhui@2x.png" alt="">
+        <img src="user.avatar" alt>
       </div>
     </div>
     <div class="user-name">
-      <span>啦啦啦啦啦</span>
+      <span>user.startname</span>
       <img src="../assets/images/nvtub@2x.png" alt>
     </div>
   </div>
@@ -18,13 +19,19 @@
     width: 8rem;
     margin: auto;
     text-align: center;
-    border-bottom: solid 1px #dfdfdd;
+    /*border-bottom: solid 1px #dfdfdd;*/
   }
   .big-head{
     width: 10rem;
     height: 4.8rem;
     background-color: #5677fc;
     position: relative;
+  }
+  .bg-blur{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: blur(10px);
   }
   .big-head a{
     display: inline-block;
@@ -63,3 +70,19 @@
     margin: 0.267rem auto;
   }
 </style>
+
+<script>
+  export default{
+    props:['id'],
+    data(){
+      return {
+        userId:this.id,
+        user:''
+      }
+    },
+    mounted(){
+      let list = JSON.parse(window.localStorage.data)
+      this.user = list.data[this.userId]
+    }
+  }
+</script>

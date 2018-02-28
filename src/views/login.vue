@@ -99,6 +99,8 @@
           }
           this.$http.post('',data).then((res)=>{
             if(res.Status === true){
+              window.localStorage.setItem('token',res.data)
+              console.log(window.localStorage.token)
               this.$router.push('/index')
             }
           })
