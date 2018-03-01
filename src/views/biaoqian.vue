@@ -13,6 +13,7 @@
     padding: 0.534rem;
     overflow-y: scroll;
     position: relative;
+    border-top: solid 1px #dfdfdd;
   }
   .biaoqian p{
     display: inline-block;

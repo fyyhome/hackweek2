@@ -1,7 +1,7 @@
 <template>
-  <!-- <div id="app"> -->
+  <div id="app">
     <router-view/>
-  <!-- </div> -->
+  </div>
 </template>
 
 <script>
@@ -20,4 +20,11 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }*/
+#app{
+  width: 10rem;
+  margin: auto;
+}
+#app > div{
+  position: relative;
+}
 </style>

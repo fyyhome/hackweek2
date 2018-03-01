@@ -1,0 +1,200 @@
+<template>
+  <div>
+    <div class="headdiv">
+      <router-link to="/index"></router-link>
+      <p>name</p>
+      <div>
+        <p>5</p>
+        <img src="../assets/images/yellowstars@2x.png" alt>
+      </div>
+    </div>
+    <div id="chatbg" class="chat">
+      <!-- <div class="recive">
+        <div>
+          <img src="../assets/images/yellowstars@2x.png" alt>
+        </div>
+      </div>
+      <div class="send">
+        <div>
+          <img src="../assets/images/yellowstars@2x.png" alt>
+        </div>
+      </div> -->
+    </div>
+    <div class="cin">
+      <input type="text" name="xiaoxi" v-model="msg">
+      <button id="sendMsg" @click="socketSend" disabled="disabled">发送</button>
+    </div>
+  </div>
+  
+</template>
+
+<style>
+  .cin{
+    width: 10rem;
+    height: 1.307rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .cin > input{
+    width: 7.08rem;
+    height: 1.04rem;
+    font-size: 32px;
+    padding-left: 0.133rem;
+    color: #565656;
+    overflow-y: scroll;
+    border-radius: 0.133rem;
+    border: solid 1px #dfdfdd;
+  }
+  .cin > button{
+    width: 1.6rem;
+    height: 1.04rem;
+    background-color: #5677fc;
+    border-radius: 0.2rem;
+    font-size: 32px;
+    color: #ffffff;
+  }
+  .headdiv{
+    width: 10rem;
+    height: 1.173rem;
+    background-color: #5677fc;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .headdiv > p{
+    margin:auto;
+    font-size: 36px;
+    line-height: 1;
+    color: #ffffff;
+  }
+  .headdiv > a{
+    width: 0.293rem;
+    height: 0.533rem;
+    margin: 0.32rem 0.533rem;
+    background-image: url(../assets/images/fanhui@2x.png);
+  }
+  .headdiv > div{
+    display: flex;
+    margin: 0.32rem 0.533rem;
+    flex-direction: row;
+  }
+  .headdiv > div p{
+    margin:auto;
+    font-size: 36px;
+    padding: 2px 5px;
+    color: #ffffff;
+  }
+  .chat{
+    width: 10rem;
+    height: 15.25rem;
+    background-color: #f1f1f1;
+    overflow-y: scroll;
+  }
+  .recive,.send{
+    padding: 0.533rem 0.533rem;
+    display: flex;
+    flex-direction: row;
+  }
+  .recive > div > img,.send > div > img{
+    width: 1.067rem;
+    height: 1.067rem;
+    border-radius: 50%;
+  }
+  .recive > div,.send > div {
+    display: flex;
+  }
+  .recive{
+    justify-content: flex-start;
+  }
+  .send{
+    justify-content: flex-end;
+  }
+  .recive > div::after{
+    content: '啦啦啦啦啦啦啦啦啦啦啦';
+    display: inline-block;
+    max-width: 6.053rem;
+    position: relative;
+    background-color: #ffffff;
+    font-size: 32px;
+    left: 0.267rem;
+    top: 0.5rem;
+    padding: 0.267rem;
+    border-radius: 0rem 0.133rem 0.133rem 0.133rem;
+  }
+  .send > div::before{
+    content: '啦啦啦啦啦啦啦啦啦啦啦';
+    display: inline-block;
+    max-width: 6.053rem;
+    position: relative;
+    background-color: #ffffff;
+    font-size: 32px;
+    right: 0.267rem;
+    top: 0.5rem;
+    padding: 0.267rem;
+    border-radius: 0.133rem 0 0.133rem 0.133rem;
+  }
+</style>
+
+<script>
+  export default{
+    data(){
+      return {
+        websocket:null,
+        msg:''
+      }
+    },
+    methods:{
+      appendChatDiv(type , msg){
+        let parent = document.getElementById('chatbg')
+        let rec = document.createElement('div')
+        let imgDiv = document.createElement('div')
+        let img = document.createElement('img')
+        if(type == 'recive'){
+          rec.className = 'recive'
+          imgDiv.onclick = function(){
+            this.$router.push('/friend')
+          }
+          let afterStyle = window.getComputedStyle(imgDiv,":after")
+          afterStyle.content = msg
+        }
+        else if(type == 'send'){
+          rec.className = 'send'
+          imgDiv.onclick = function(){
+            this.$router.push('/user')
+          }
+          let beforeStyle = window.getComputedStyle(imgDiv,":before")
+          beforeStyle.content = msg
+        }
+        img.src = 'https://www.baidu.com/favicon.ico'
+        parent.appendChild(rec)
+        rec.appendChild(imgDiv)
+        imgDiv.appendChild(img)
+      },
+      socketSend(){
+        this.socket.send(this.msg)
+      },
+      initial(){
+        this.socket = new WebSocket('')
+        this.socket.onopen = function(evt){
+          document.getElementById('sendMsg').disabled = false
+        }
+        this.socket.onmessage = function(evt){
+          let res = JSON.parse(evt.data)
+          this.appendChatDiv('recive',res.message)
+        }
+        this.socket.onerror = function(evt){
+          document.getElementById('sendMsg').disabled = true
+        }
+        this.socket.onclose = function(evt){
+          document.getElementById('sendMsg').disabled = true
+        }
+      }
+    },
+    created(){
+      this.initial()
+    }
+  }
+</script>

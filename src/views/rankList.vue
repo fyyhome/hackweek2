@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="head">
-      <router-link to="/"></router-link>
+      <router-link to="/index"></router-link>
       <p>排行榜</p>
       <div class="headimg">
         <div>
@@ -47,8 +47,6 @@
     linear-gradient(
       #5677fc, 
       #5677fc);
-    /*background-blend-mode: normal, 
-      normal;*/
   }
   .head > a{
     display: inline-block;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="headdiv">
-      <router-link to="_blank"></router-link>
+      <router-link to="/index"></router-link>
       <p>我的消息</p>
     </div>
     <div class="xiaoxi-list">

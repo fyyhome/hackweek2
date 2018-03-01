@@ -7,6 +7,8 @@ import ShouHu from '../views/shouhu.vue'
 import RankList from '../views/rankList.vue'
 import XiaoXi from '../views/xiaoxi.vue'
 import User from '../views/user.vue'
+import Chat from '../views/chat.vue'
+import Friend from '../views/friend.vue'
 
 Vue.use(Router)
 
@@ -47,6 +49,16 @@ export default new Router({
       path: '/user',
       name: 'User',
       component: User
+    },
+    {
+      path: '/chat',
+      name: 'Chat',
+      component: Chat
+    },
+    {
+      path: '/friend',
+      name: 'Friend',
+      component: Friend
     }
   ]
 })

@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .user-name{
     width: 8rem;
     margin: auto;
@@ -38,6 +38,7 @@
     width: 0.293rem;
     height: 0.533rem;
     position: absolute;
+    z-index: 99;
     margin: 0.293rem 0.533rem;
     background-color: transparent;
     background-image: url(../assets/images/fanhui@2x.png);

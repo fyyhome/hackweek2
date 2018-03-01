@@ -5,7 +5,7 @@
       <span>星空</span>
     </div>
     <div id="two">
-      <router-link to='/login'></router-link>
+      <router-link to='/chat'></router-link>
       <span>聊天</span>
     </div>
     <div id="three">
@@ -18,8 +18,8 @@
 <style scoped>
   .footer{
     display: flex;
-    position: fixed;
-    bottom: 0;
+    /*position: fixed;
+    bottom: 0;*/
     z-index: 1;
     background-color: white;
     width: 10rem;

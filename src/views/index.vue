@@ -8,16 +8,17 @@
       <router-link to="{name:'ShouHu',params:{id:2}}"></router-link>
       <router-link to="{name:'ShouHu',params:{id:3}}"></router-link>
       <router-link to="{name:'ShouHu',params:{id:4}}"></router-link>
+      <button class="shua-xin">换一批</button>
     </div>
     <footer-nav></footer-nav>
-    <button class="shua-xin">换一批</button>
   </div>
 </template>
 
 <style scoped>
   .icon{
     display: inline-block;
-    position: fixed;
+    /*position: fixed;*/
+    position: absolute;
     z-index: 1;
     width: 1.2rem;
     height: 1.2rem;
@@ -38,7 +39,8 @@
   }
   .index-bg{
     width: 10rem;
-    height: 17.78rem;
+    height: 16.5rem;
+    position: relative;
   }
   .night{
     background-image: url(../assets/images/beijin@2x.png);
@@ -75,8 +77,10 @@
   .shua-xin{
     width: 1.693rem;
     height: 0.92rem;
-    position: fixed;
-    bottom: 1.573rem;
+    /*position: fixed;
+    bottom: 1.573rem;*/
+    position: absolute;
+    bottom: 0.573rem;
     right: 0.533rem;
     background-color: rgba(255,255,255,0.3);
     border-radius: 0.267rem;

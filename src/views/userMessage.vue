@@ -26,7 +26,9 @@
       </div>
       <div class="base-wrap word">
         <p>星语</p>
-        <font>女</font>
+        <div>
+          啦啦啦啦啦啦啦啦啦啦
+        </div>
         <button></button>
       </div>
     </div>
@@ -138,14 +140,14 @@
     position: absolute;
     right: 1.027rem;
   }
-  .word font{
+  .word div{
     display: inline-flex;
     width: 5.5rem;
     height: 0.973rem;
     justify-content: flex-end;
+    align-items: center;
     flex-wrap: wrap;
     font-size: 26px;
-    /*line-height: 1;*/
     color: #989898;
     position: absolute;
     right: 1.027rem;
@@ -326,6 +328,7 @@
     },
     methods:{
       uploadImage(){
+        this.userHead  = document.getElementById('head-image').files[0]
         let userHead = this.userHead
         let formdata = new FormData()
         formdata.append('userHead',userHead)
