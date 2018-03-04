@@ -113,7 +113,7 @@
     justify-content: flex-end;
   }
   .recive > div::after{
-    content: '啦啦啦啦啦啦啦啦啦啦啦';
+    content:attr(data-attr);
     display: inline-block;
     max-width: 6.053rem;
     position: relative;
@@ -125,7 +125,7 @@
     border-radius: 0rem 0.133rem 0.133rem 0.133rem;
   }
   .send > div::before{
-    content: '啦啦啦啦啦啦啦啦啦啦啦';
+    content:attr(data-attr);
     display: inline-block;
     max-width: 6.053rem;
     position: relative;
@@ -152,21 +152,18 @@
         let rec = document.createElement('div')
         let imgDiv = document.createElement('div')
         let img = document.createElement('img')
+        imgDiv.setAttribute('data-attr',msg)
         if(type == 'recive'){
           rec.className = 'recive'
           imgDiv.onclick = function(){
             this.$router.push('/friend')
           }
-          let afterStyle = window.getComputedStyle(imgDiv,":after")
-          afterStyle.content = msg
         }
         else if(type == 'send'){
           rec.className = 'send'
           imgDiv.onclick = function(){
             this.$router.push('/user')
           }
-          let beforeStyle = window.getComputedStyle(imgDiv,":before")
-          beforeStyle.content = msg
         }
         img.src = 'https://www.baidu.com/favicon.ico'
         parent.appendChild(rec)
@@ -175,6 +172,8 @@
       },
       socketSend(){
         this.socket.send(this.msg)
+        this.appendChatDiv('send',this.msg)
+        console.log(this.msg)
       },
       initial(){
         this.socket = new WebSocket('')

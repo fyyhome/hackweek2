@@ -33,13 +33,8 @@
     props:['id'],
     data(){
       return {
-        userId:this.id,
-        user:''
+        user:this.id
       }
-    },
-    mounted(){
-      let list = JSON.parse(window.localStorage.data)
-      this.user = list.data[this.userId]
     }
   }
 </script>

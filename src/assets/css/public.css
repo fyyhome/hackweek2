@@ -1,10 +1,16 @@
+@font-face{
+  font-family: PingFang-SC-Medium;
+  src:url(../font/PingFang-Medium.ttf);
+  font-weight: normal;
+  font-stretch: normal;
+}
 *{
   margin:0;
   padding:0;
   box-sizing: border-box;
   border: none;
   outline: none;
-  font-family: Helvetica,"PingFang SC";
+  font-family: PingFang-SC-Medium;
   background-size: 100%;
   background-repeat: no-repeat;
   text-decoration: none;

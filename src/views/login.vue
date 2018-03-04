@@ -95,13 +95,21 @@
         else{
           let data = {
             'userid': this.username,
-            'Password': this.password
+            'password': this.password
           }
-          this.$http.post('',data).then((res)=>{
-            if(res.Status === true){
-              window.localStorage.setItem('token',res.data)
-              console.log(window.localStorage.token)
-              this.$router.push('/index')
+          this.$http.post('http://39.106.219.21:3000/api/login',data).then((res)=>{      
+            if(res.body.code == 0){
+              window.localStorage.setItem('token',res.body.token)
+              if(res.body.data != false){
+                this.global = res.body.data
+                this.$router.push('/index')
+              }
+              else{
+                this.$router.push('/userMessage')
+              }
+            }
+            else{
+              this.tip = true
             }
           })
         }

@@ -3,12 +3,14 @@
     <router-link to="/rankList" class="icon rank-list"></router-link>
     <router-link to="/xiaoxi" class="icon xiao-xi"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
-      <router-link to="{name:'ShouHu',params:{id:0}}"></router-link>
-      <router-link to="{name:'ShouHu',params:{id:1}}"></router-link>
-      <router-link to="{name:'ShouHu',params:{id:2}}"></router-link>
-      <router-link to="{name:'ShouHu',params:{id:3}}"></router-link>
-      <router-link to="{name:'ShouHu',params:{id:4}}"></router-link>
-      <button class="shua-xin">换一批</button>
+      <router-link :to="{name:'ShouHu',params: { id: user[0]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[2]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[3]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[4]}}"></router-link>
+      <button class="shua-xin" @click="refresh">换一批</button>
+      <div class="animation-div" v-show="animate">
+      </div>
     </div>
     <footer-nav></footer-nav>
   </div>
@@ -17,7 +19,6 @@
 <style scoped>
   .icon{
     display: inline-block;
-    /*position: fixed;*/
     position: absolute;
     z-index: 1;
     width: 1.2rem;
@@ -77,15 +78,29 @@
   .shua-xin{
     width: 1.693rem;
     height: 0.92rem;
-    /*position: fixed;
-    bottom: 1.573rem;*/
     position: absolute;
     bottom: 0.573rem;
     right: 0.533rem;
+    font-size: 30px;
     background-color: rgba(255,255,255,0.3);
     border-radius: 0.267rem;
     color: #ffffff;
-    font-size: 30px;
+  }
+  @keyframes shuaxin{
+    from {transform:rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+  .animation-div{
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: transparent;
+    position: absolute;
+    top: calc(45% - 0.8rem);
+    left: calc(50% - 0.8rem);
+    background-image: url(../assets/images/shuaxin.png);
+    animation-name: shuaxin;
+    animation-duration: 0.5s;
+    animation-iteration-count: 3;
   }
 </style>
 
@@ -97,27 +112,63 @@
     },
     data(){
       return {
-        night:true
+        night:true,
+        user:'',
+        animate:false
       }
     },
     methods:{
       getTime(){
-        console.log(1)
         let t = new Date()
         let hour = t.getHours()
+        console.log(hour)
         if(hour >= 19 || hour <= 7){
           this.night = true
         }
         else{
           this.night = false
         }
+      },
+      refresh(){
+        this.animate = true
+        this.$http.get('').then((res)=>{
+          if(res.body.code === 0){
+            this.user = res.body.data
+            let that = this
+            setTimeout(function(){
+              that.animate = false
+            },1500)
+          }
+          else{
+            alert('网络错误！')
+          }
+        })
       }
     },
     mounted(){
+      // this.user = [
+      //   {
+      //     name:'fyy1',
+      //     id:1
+      //   },
+      //   {
+      //     name:'fyy2',
+      //     id:2
+      //   },
+      //   {
+      //     name:'fyy3',
+      //     id:3
+      //   }
+      // ]
+      this.getTime()
       setInterval(this.getTime,60000)
       this.$http.get('').then((res)=>{
-        let list = JSON.stringify(res)
-        window.localStorage.setItem('data',list)
+        if(res.body.code === 0){
+          this.user = res.body.data
+        }
+        else{
+          // this.$router.push('/')
+        }
       })
     }
   }

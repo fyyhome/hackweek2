@@ -8,7 +8,7 @@
       <div class="base-wrap head">
         <p>头像</p>
         <div>
-          <input type="file" accept="image/*" id="head-image" @change="uploadImage">
+          <input type="file" accept="image/*" id="head-image" @change="uploadImg">
         </div>
         <button></button>
       </div>
@@ -27,43 +27,43 @@
       <div class="base-wrap word">
         <p>星语</p>
         <div>
-          啦啦啦啦啦啦啦啦啦啦
+          {{starword}}
         </div>
-        <button></button>
+        <button @click="selectFn('星语')"></button>
       </div>
     </div>
     <div class="biao-qian">
       <p>选择你的星星属性，最多只能选五个</p>
       <ul>
-        <li><button>啦啦啦啦啦</button></li>
-        <li><button>啦啦啦啦</button></li>
-        <li><button>啦啦啦</button></li>
-        <li><button>啦啦啦</button></li>
-        <li><button>啦啦啦</button></li>
-        <li><button>啦啦啦</button></li>
-        <li><button>啦啦啦</button></li>
+        <li v-for="(item,index) in biaoqian"><button :class="[{'bq-status':item.status},'bq-button']" @click="changeStatus(index)">{{item.bqname}}</button></li>
       </ul>
       <button @click="selectFn('添加标签')">+ 自定义标签</button>
     </div>
     <footer>
-      <button>点亮星星</button>
+      <button @click="upload">点亮星星</button>
     </footer>
+    <div class="shadow" v-show="tip" @click="changeTip">
+      <div class="tip-box">
+        请完善个人资料！
+      </div>
+    </div>
     <div class="shadow" v-if="select != ''">
       <div class="check-box">
         <h2>{{select}}</h2>
         <ul v-if="select ==='性别'">
           <li>
             <input type="radio" id="man" v-model="sex" value="男">
-            <lable for="man">男</lable>
+            <label for="man">男</label>
           </li>
           <li>
             <input type="radio" id="woman" v-model="sex" value="女">
-            <lable for="woman">女</lable>
+            <label for="woman">女</label>
           </li>
         </ul>
-        <input type="text" v-model="username" v-if="select === '昵称'" placeholder="填写昵称">
-        <input type="text" v-model="biaoqian" v-if="select === '添加标签'" placeholder="填写标签">
-        <button class="quxiao" @click="resureFn">取消</button>
+        <input id="username" type="text" v-bind="username" v-if="select === '昵称'" placeholder="填写昵称">
+        <input id="zdybiaoqian" type="text" v-model="zdybiaoqian" v-if="select === '添加标签'" placeholder="填写标签">
+        <input id="starword" type="text" v-bind="starword" v-if="select === '星语'" placeholder="填写星语">
+        <button class="quxiao" @click="cancleFn">取消</button>
         <button class="queren" @click="resureFn">确认</button>
       </div>
     </div>
@@ -81,7 +81,7 @@
     display: inline-block;
     width: 0.293rem;
     height: 0.533rem;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAoCAYAAAD6xArmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkIxRUM2NUJBMEJFQjExRThBREYxRkUzMjU4NUVENEU2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkIxRUM2NUJCMEJFQjExRThBREYxRkUzMjU4NUVENEU2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QjFFQzY1QjgwQkVCMTFFOEFERjFGRTMyNTg1RUQ0RTYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QjFFQzY1QjkwQkVCMTFFOEFERjFGRTMyNTg1RUQ0RTYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7Xuc2nAAABSklEQVR42rTWMU/CQBQH8LagJuzizNfAzYlgIGV1dGVhLwnRaNhcqMagk4ODH4HFREpCMI6Gja9yvAM7cHnX3rv3fMmfpK/JL8dxfTRQSgVCaUDeIVf6OhCEH9S+NpBTKXSiDuutGvArhfSN3q/0SnXdc/c4RdC7/P6/oL5wavv6HLh0pT6w00qp8CMFdYWfqKgL/Oy6pxR4iqC3rr8JBb2hnCCs+YKgI+p5NxuvCJr4PJ1lK018Z0kROuRMPv0xRtBr7vCPYCjXkeG9Zo9/0GuQH2TVLe5W6JxY8DYXFsfNxrEUjjWPIN8IfsmFRfCimza8w4WL8C4XzvEVgsdcOMeXCN7jwmScevArkIUL7vO4RhY85sI6ISQrwrmvsZltW8Kd7l8hJIM0jX6XC+vSfxZzA/+QgHP8C3L+d30hBes6gwwgn5DZVoABANZqdhA+IPi7AAAAAElFTkSuQmCC);
+    background-image: url(../assets/images/fanhui@2x.png);
     position: absolute;
     top: 0.293rem;
     left: 0.533rem;
@@ -129,7 +129,7 @@
     width: 0.227rem;
     height: 0.413rem;
     background-color: #ffffff;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAfCAYAAAABZyaKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkM1NzEzMTU2MEJFQjExRThBMDI2QjNGMjhGNDQzODFFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkM1NzEzMTU3MEJFQjExRThBMDI2QjNGMjhGNDQzODFFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QzU3MTMxNTQwQkVCMTFFOEEwMjZCM0YyOEY0NDM4MUUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QzU3MTMxNTUwQkVCMTFFOEEwMjZCM0YyOEY0NDM4MUUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4NMIjBAAAB00lEQVR42pSWWUoDQRCGJ5MRBXEhGg/hsw8eIkfQRw3uhiRGDRqNBo1rVMRxAxWP4CmEvHoE44IQNbhvf8k/MAxZugs+Jj0h31RXV/fEZ9t2j2EYg+AMnIOSoRHhcNiwcN0GLaALyPgIvOmITHABfKAOrII+UK8rGeFUfkADWKLI0pE8gnGXqBEsggFmqCSRKIIYOKVIapRmlsoSiQeQACfgF7SCFIjoSCTuwTQ4pigAkiCqI5G4BTPgkOM2MFVNZFa4fwPmwL5HFNORSBRYXNslmiwnMmvU7JqiPY9oQkfiZLTgmVrCnZGp2JQFT40CXMW4DPyhUEi1u2V3X3KPdbKPuvP5vN809OIOrPMq0SRLryuRp/dzOhLv4MDSEAS4MnGOX8AayKhm0u5pthLPnhROtg+VTIJ8epRHwzPIcbX+o5akg40VoUDOni3ubkNFEmRTjbGfijyPU6ptH2QRR6WXKMiVE1TKxCniML93BOlKKVtlljHpEkgNNmUZeUjVlEgjzfJFJvef2AfL4Lta9R1JM5h3CWQZVyj5qtUDFl8RstWHWETpxCzYYFsbKpIsM/DxRxkW8lV1P4ikl58/OaUdZqP1GpXlvGJRd3X/FUj8CTAAZc9r2xTsDzMAAAAASUVORK5CYII=);
+    background-image: url(../assets/images/jiantouyou@2x.png);
     position: absolute;
     right: 0.533rem;
   }
@@ -160,7 +160,7 @@
     border-radius: 50%;
     background-size: auto;
     background-position: center;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJEMUNFREI0MEJFQjExRThBNkFDQ0Q2ODg3NzgyQ0U3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJEMUNFREI1MEJFQjExRThBNkFDQ0Q2ODg3NzgyQ0U3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkQxQ0VEQjIwQkVCMTFFOEE2QUNDRDY4ODc3ODJDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkQxQ0VEQjMwQkVCMTFFOEE2QUNDRDY4ODc3ODJDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5SBYLxAAABQElEQVR42mKcMWMGA5WBCRA3Q9k1QHwWn+L09HSSDGehsmOFgPggEHNB+bZALAvE76llAROVHayJ5FgQ4AZiLWpaQG0H/ydSbNA4+B+RYoPGwTQHow4edfCog0cdPOrgUQePOnjUwYPJwW+JFCMbsCA5XBZKk9t+/Q3EuljEQWLfgJgVm6aZM2cSMpcR2kR9DOxO/QM52AKIlwKxEhXawthibC0eOVLAPaDnokGGLKCCYwklL2okPZAb5zNBO45DBQiBHJw3hBycB0rDK4D4AhDrAPFfCvpgf6E95E408XIgvgbEzBQkNZDey8BMdxNWStyAYkrBeSwOBmXop7g0kDqQQu1yWJZIsdGabtTBow4edfCog0cdPOrgUQePOnggHMxIpNigcTArkWKDxsF3iRQbNA4G9SyioDQym2oAIMAA/wI13Ps98eIAAAAASUVORK5CYII=);
+    background-image: url(../assets/images/tianjia@2x.png);
   }
   #head-image{
     width: 100%;
@@ -186,7 +186,7 @@
     float: left;
     margin-bottom: 0.267rem;
   }
-  .biao-qian li button{
+  .bq-button{
     width: auto;
     height: 1rem;
     line-height: 1rem;
@@ -199,6 +199,10 @@
     padding-right: 0.267rem;
     text-align: center;
     margin-right: 0.267rem;
+  }
+  .bq-status{
+    border: 1px solid #5677fc;
+    color: #5677fc;
   }
   .button-checked{
     color: #5677fc;
@@ -264,7 +268,7 @@
   .check-box ul > li:last-child{
     margin-top: 0.534rem;
   }
-  input[type="radio"] + lable::before{
+  input[type="radio"] + label::before{
     content: "\a0";
     display: inline-block;
     vertical-align: .1em;
@@ -286,9 +290,12 @@
     position: absolute;
     clip: rect(0,0,0,0);
   }
-  input[type="radio"]:checked + lable::before{
+  input[type="radio"]:checked + label::before{
     content: "\2713";
     border-color: #5677fc;
+  }
+  input[type="radio"]:checked + label{
+    color: #5677fc;
   }
   .check-box button{
     width: 1.334rem;
@@ -313,6 +320,17 @@
     font-size: 34px;
     color: rgb(152,152,152); 
   }
+  .tip-box{
+    width: 7.6rem;
+    height: 5.467rem;
+    background-color: #ffffff;
+    border-radius: 0.4rem;
+    font-size: 36px;
+    color:rgb(86,86,86);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 
 <script>
@@ -322,24 +340,131 @@
         userHead: null,
         sex: '女',
         username: '',
-        biaoqian: '',
+        zdybiaoqian:'',
+        biaoqian: [
+          {
+            bqname:'汪星人',
+            status:false
+          },
+          {
+            bqname:'女神',
+            status:false
+          },
+          {
+            bqname:'长腿欧巴',
+            status:false
+          },
+          {
+            bqname:'懒癌患者',
+            status:false
+          },
+          {
+            bqname:'二次元',
+            status:false
+          },
+          {
+            bqname:'萌萌哒',
+            status:false
+          },
+          {
+            bqname:'民谣',
+            status:false
+          },
+          {
+            bqname:'不吃肉不能活',
+            status:false
+          }
+        ],
+        starword: '',
+        tip:false,
         select: ''
       } 
     },
     methods:{
-      uploadImage(){
+      upload(){
+        let label = []
+        for(let item of this.biaoqian){
+          if(item.status == true)
+            label.push(item)
+        }
+        if(this.username == '' || this.starword == '' || label.length == 0){
+          this.tip = true
+        }
+        else{
+          formdata.append('startname',this.username)
+          formdata.append('gender',this.sex)
+          formdata.append('starword',this.starword)
+          formdata.append('label',label)
+          this.$http.post('',formdata).then((res)=>{
+            if(res.body.code == 0){
+              this.global = res.body.data
+            }
+          })
+        }   
+      },
+      //上传图片部分
+      uploadImg(){
         this.userHead  = document.getElementById('head-image').files[0]
         let userHead = this.userHead
         let formdata = new FormData()
         formdata.append('userHead',userHead)
         this.$http.post('',formdata).then((res)=>{
 
-        })
+          })
+      },
+      changeTip(){
+        this.tip = false
+      },
+      changeStatus(index){
+        let count = 0
+        for(let item of this.biaoqian){
+          if(item.status === true){
+            count += 1
+          }
+        }
+        if(count < 5){
+          this.biaoqian[index].status = !this.biaoqian[index].status
+        }
+        else if(count >= 5){
+          this.biaoqian[index].status = false
+        }
       },
       selectFn(title){
         this.select = title
+        if(this.select === '昵称'){
+          setTimeout(function(){
+            document.getElementById('username').focus()
+          },200)
+        }
+        else if(this.select === '星语'){
+          setTimeout(function(){
+            document.getElementById('starword').focus()
+          },200)
+        }
+        else if(this.select === '添加标签'){
+          setTimeout(function(){
+            document.getElementById('zdybiaoqian').focus()
+          },200)
+        }
       },
       resureFn(){
+        if(this.select === '昵称'){
+          this.username = document.getElementById('username').value
+        }
+        else if(this.select === '星语'){
+          this.starword = document.getElementById('starword').value
+        }
+        else{
+          if(this.zdybiaoqian != ''){
+            this.biaoqian.push({
+              bqname: this.zdybiaoqian,
+              status: true
+            })
+          }
+        }
+        this.select = ''  
+      },
+      cancleFn(){
         this.select = ''
       }
     }

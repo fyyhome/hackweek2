@@ -92,6 +92,9 @@
       showOverlay(){
         this.overlay = false
       }
+    },
+    mounted(){
+      console.log(this.userId)
     }
   }
 </script>

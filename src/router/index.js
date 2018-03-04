@@ -9,6 +9,7 @@ import XiaoXi from '../views/xiaoxi.vue'
 import User from '../views/user.vue'
 import Chat from '../views/chat.vue'
 import Friend from '../views/friend.vue'
+import YinDao from '../views/yindao.vue'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ export default new Router({
       path: '/friend',
       name: 'Friend',
       component: Friend
+    },
+    {
+      path: '/yindao',
+      name: 'YinDao',
+      component: YinDao
     }
   ]
 })
