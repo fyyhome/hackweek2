@@ -42,6 +42,7 @@
   border-radius: 0.4rem;
   margin: auto;
   text-align: center;
+  padding-top: 2rem;
  }
  .lightbox span{
   font-size: 36px;
@@ -79,22 +80,27 @@
     },
     methods:{
       shouhuFn(){
-        this.$http.post('','startId=${this.userId}').then((res)=>{
+        this.$http.post('http://u.test.myhoster.top:8090/api/star'+ '?' + 'chatID=' + this.userId.chatID).then((res)=>{
           if(res.code === 0){
             this.overlay = true
           }
           else{
-            this.tip = res.message
+            this.tip = res.body.message
             this.overlay = true
           }
         })
       },
       showOverlay(){
         this.overlay = false
+        if(this.tip == '守护成功'){
+          this.$router.push('/index')
+        }
       }
     },
     mounted(){
-      console.log(this.userId)
+      if(this.userId == undefined){
+        //this.$router.push('/index')
+      }
     }
   }
 </script>

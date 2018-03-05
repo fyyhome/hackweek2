@@ -5,28 +5,28 @@
       <p>排行榜</p>
       <div class="headimg">
         <div>
-          <img src="../assets/images/nvtub@2x.png" alt>
+          <img :src="listone.avatar1" alt>
         </div>
         <div class="floatdiv">
-          <img src="../assets/images/nvtub@2x.png" alt>
+          <img :src="listone.avatar2" alt>
         </div>
       </div>
       <div class="msg">
-        <p>{{list[0].username1}}&nbsp;&nbsp;&nbsp;&nbsp;{{list[0].username2}}</p>
+        <p>{{listone.starname1}}&nbsp;&nbsp;&nbsp;&nbsp;{{listone.starname2}}</p>
         <div>
           <img src="../assets/images/yellowstars@2x.png" alt>
-          <p>{{list[0].days}}天</p>
+          <p>{{listone.days}}天</p>
         </div>
       </div>
     </div>
     <div class="listdiv">
-      <div v-for="item in list">
-        <span class="rankspan">{{item.rank}}</span>
+      <div v-for="(item,index) in list">
+        <span class="rankspan">{{index+2}}</span>
         <div class="headicon">
-          <img src="../assets/images/nvtub@2x.png" alt>
-          <img src="../assets/images/nvtub@2x.png" alt>
+          <img src="item.avatar1" alt>
+          <img src="item.avatar2" alt>
         </div>
-        <p>{{item.username1}}&nbsp;&&nbsp;{{item.username2}}</p>
+        <p>{{item.starname1}}&nbsp;&&nbsp;{{item.starname2}}</p>
         <div class="days daysflex">
           <img src="../assets/images/yellowstars@2x.png" alt>
           <p>{{item.days}}天</p>
@@ -185,17 +185,21 @@
   export default{
     data(){
       return {
-        list:[
-          {
-            userimg1:1,
-            userimg2:1,
-            username1:'啦啦啦啦啦',
-            username2: '啦啦啦',
-            days: 22,
-            rank: 2
-          }
-        ]
+        list:[],
+        listone:''
       }
+    },
+    created(){
+      this.$http.get('http://u.test.myhoster.top:8090/api/rankChart').then((res)=>{
+        if(res.body.code == 0){
+          this.list = res.body.data
+          this.listone = this.list[0]
+          this.list.splice(0,1)
+        }
+        else{
+          alert('网络错误')
+        }
+      })
     }
   }
 </script>

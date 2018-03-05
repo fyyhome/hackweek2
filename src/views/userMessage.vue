@@ -64,7 +64,7 @@
         <input id="zdybiaoqian" type="text" v-model="zdybiaoqian" v-if="select === '添加标签'" placeholder="填写标签">
         <input id="starword" type="text" v-bind="starword" v-if="select === '星语'" placeholder="填写星语">
         <button class="quxiao" @click="cancleFn">取消</button>
-        <button class="queren" @click="resureFn">确认</button>
+        <button class="queren" @click="resureFn">确定</button>
       </div>
     </div>
   </div>
@@ -93,7 +93,6 @@
   }
   .base{
     width: 10rem;
-    /*height: 6.9rem;*/
     height: 7.25rem;
     display: flex;
     flex-direction: column;
@@ -114,6 +113,7 @@
   }
   .sex{
     height: 1.173rem;
+    padding-top: 0.2rem;
   }
   .word{
     height: 1.707rem;
@@ -291,7 +291,7 @@
     clip: rect(0,0,0,0);
   }
   input[type="radio"]:checked + label::before{
-    content: "\2713";
+    content: "\a0";
     border-color: #5677fc;
   }
   input[type="radio"]:checked + label{
@@ -391,13 +391,18 @@
           this.tip = true
         }
         else{
-          formdata.append('startname',this.username)
-          formdata.append('gender',this.sex)
-          formdata.append('starword',this.starword)
-          formdata.append('label',label)
-          this.$http.post('',formdata).then((res)=>{
+          let data = {
+            starname: this.username,
+            gender: this.sex,
+            starword: this.starword,
+            label: label
+          }
+          this.$http.post('http://39.106.219.21:3000/api/setinfo',data).then((res)=>{
             if(res.body.code == 0){
               this.global = res.body.data
+            }
+            else{
+              this.$router.push('/')
             }
           })
         }   
@@ -407,10 +412,12 @@
         this.userHead  = document.getElementById('head-image').files[0]
         let userHead = this.userHead
         let formdata = new FormData()
-        formdata.append('userHead',userHead)
-        this.$http.post('',formdata).then((res)=>{
-
-          })
+        formdata.append('file',userHead)
+        this.$http.post('http://39.106.219.21:3000/api/avatar',formdata).then((res)=>{
+          if(res.body.code != 0){
+            alert('网络错误!')
+          }
+        })
       },
       changeTip(){
         this.tip = false

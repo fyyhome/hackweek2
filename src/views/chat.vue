@@ -143,7 +143,8 @@
     data(){
       return {
         websocket:null,
-        msg:''
+        msg:'',
+        data:''
       }
     },
     methods:{
@@ -173,26 +174,38 @@
       socketSend(){
         this.socket.send(this.msg)
         this.appendChatDiv('send',this.msg)
-        console.log(this.msg)
+        this.msg = ''
       },
       initial(){
-        this.socket = new WebSocket('')
+        this.socket = new WebSocket('ws://116.196.123.49:8888/c?token=' + window.localStorage.chattoken)
         this.socket.onopen = function(evt){
           document.getElementById('sendMsg').disabled = false
         }
+        let that = this
         this.socket.onmessage = function(evt){
           let res = JSON.parse(evt.data)
-          this.appendChatDiv('recive',res.message)
+          console.log(res)
+          that.appendChatDiv('recive',res.msg)
         }
         this.socket.onerror = function(evt){
+          alert('网络错误！')
           document.getElementById('sendMsg').disabled = true
         }
         this.socket.onclose = function(evt){
+          alert('网络错误！')
           document.getElementById('sendMsg').disabled = true
         }
       }
     },
     created(){
+      this.$http.get('').then((res)=>{
+        if(res.body.code == 0){
+          this.data = res.body.data
+        }
+        else{
+          this.$router.push('/index')
+        }
+      })
       this.initial()
     }
   }

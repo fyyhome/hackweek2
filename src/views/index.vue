@@ -3,7 +3,7 @@
     <router-link to="/rankList" class="icon rank-list"></router-link>
     <router-link to="/xiaoxi" class="icon xiao-xi"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
-      <router-link :to="{name:'ShouHu',params: { id: user[0]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[2]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[3]}}"></router-link>
@@ -131,38 +131,25 @@
       },
       refresh(){
         this.animate = true
-        this.$http.get('').then((res)=>{
+        let that = this
+        setTimeout(function(){
+          that.animate = false
+        },1500)
+        this.$http.get('http://u.test.myhoster.top:8090/api/stars').then((res)=>{
           if(res.body.code === 0){
             this.user = res.body.data
-            let that = this
-            setTimeout(function(){
-              that.animate = false
-            },1500)
           }
           else{
+            this.animate = false
             alert('网络错误！')
           }
         })
       }
     },
     mounted(){
-      // this.user = [
-      //   {
-      //     name:'fyy1',
-      //     id:1
-      //   },
-      //   {
-      //     name:'fyy2',
-      //     id:2
-      //   },
-      //   {
-      //     name:'fyy3',
-      //     id:3
-      //   }
-      // ]
       this.getTime()
       setInterval(this.getTime,60000)
-      this.$http.get('').then((res)=>{
+      this.$http.get('http://u.test.myhoster.top:8090/api/stars').then((res)=>{
         if(res.body.code === 0){
           this.user = res.body.data
         }

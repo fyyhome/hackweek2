@@ -2,14 +2,16 @@
   <div>
     <div class="big-head">
       <router-link to="/index"></router-link>
-      <img class="bg-blur" src="user.avatar">
+      <img class="bg-blur" :src="user.avatar">
       <div class="small-head">
-        <img src="user.avatar" alt>
+        <img :src="user.avatar" alt>
       </div>
     </div>
     <div class="user-name">
-      <span>user.startname</span>
-      <img src="../assets/images/nvtub@2x.png" alt>
+      <span>{{user.starname}}</span>
+      <div :class="{'nan': gendersrc, 'nv' : !gendersrc}">
+      </div>
+      <!-- <img :src="gendersrc" alt> -->
     </div>
   </div>
 </template>
@@ -67,8 +69,16 @@
     font-size: 50px;
     margin-top: 1.847rem;
   }
-  .user-name img{
+  .user-name div{
+    width: 0.5rem;
+    height: 0.5rem;
     margin: 0.267rem auto;
+  }
+  .nan{
+    background-image: url(../assets/images/nan@2x.png);
+  }
+  .nv{
+    background-image: url(../assets/images/nvtub@2x.png);
   }
 </style>
 
@@ -77,12 +87,17 @@
     props:['id'],
     data(){
       return {
-        user:this.id
+        user:this.id,
+        gendersrc:''
+      }
+    },
+    mounted(){
+      if(this.user.gender == '男'){
+        this.gendersrc = true
+      }
+      else{
+        this.gendersrc = false
       }
     }
-    // mounted(){
-    //   let list = JSON.parse(window.localStorage.data)
-    //   this.user = list.data[this.userId]
-    // }
   }
 </script>
