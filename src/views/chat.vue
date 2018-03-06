@@ -2,23 +2,13 @@
   <div>
     <div class="headdiv">
       <router-link to="/index"></router-link>
-      <p>name</p>
+      <p>{{data.starname1}}</p>
       <div>
-        <p>5</p>
+        <p>{{data.days}}</p>
         <img src="../assets/images/yellowstars@2x.png" alt>
       </div>
     </div>
     <div id="chatbg" class="chat">
-      <!-- <div class="recive">
-        <div>
-          <img src="../assets/images/yellowstars@2x.png" alt>
-        </div>
-      </div>
-      <div class="send">
-        <div>
-          <img src="../assets/images/yellowstars@2x.png" alt>
-        </div>
-      </div> -->
     </div>
     <div class="cin">
       <input type="text" name="xiaoxi" v-model="msg">
@@ -156,17 +146,18 @@
         imgDiv.setAttribute('data-attr',msg)
         if(type == 'recive'){
           rec.className = 'recive'
+          img.src = this.data.avatar2
           imgDiv.onclick = function(){
             this.$router.push('/friend')
           }
         }
         else if(type == 'send'){
           rec.className = 'send'
+          img.src = this.data.avatar1
           imgDiv.onclick = function(){
             this.$router.push('/user')
           }
         }
-        img.src = 'https://www.baidu.com/favicon.ico'
         parent.appendChild(rec)
         rec.appendChild(imgDiv)
         imgDiv.appendChild(img)
@@ -177,7 +168,7 @@
         this.msg = ''
       },
       initial(){
-        this.socket = new WebSocket('ws://116.196.123.49:8888/c?token=' + window.localStorage.chattoken)
+        this.socket = new WebSocket('ws://116.196.123.49:8888/c?token=' + window.localStorage.token)
         this.socket.onopen = function(evt){
           document.getElementById('sendMsg').disabled = false
         }

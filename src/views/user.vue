@@ -2,7 +2,7 @@
   <div>
     <user-head :id="userId"></user-head>
     <router-link to="/userMessage"></router-link>
-    <p class="xingyu">拉埃绿绿绿绿绿绿绿绿绿绿绿绿</p>
+    <p class="xingyu">{{userId.starword}}</p>
     <biao-qian :id="userId"></biao-qian>
   </div>
 </template>
@@ -41,6 +41,12 @@
       return {
         userId:''
       }
+    },
+    created(){
+      console.log(window.localStorage.global)
+      console.log(JSON.parse(window.localStorage.global))
+      this.userId = JSON.parse(window.localStorage.global)
+
     }
   }
 </script>

@@ -101,7 +101,7 @@
             if(res.body.code == 0){
               window.localStorage.setItem('token',res.body.token)
               if(res.body.data != false){
-                this.global = res.body.data
+                window.localStorage.global = JSON.stringify(res.body.data)
                 this.$router.push('/index')
               }
               else{

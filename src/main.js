@@ -4,12 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
-import global_ from './views/global'
 Vue.use(VueResource)
 
 Vue.config.productionTip = false
-
-Vue.prototype.global = global_
 
 Vue.http.interceptors.push((request,next)=>{
   let token = window.localStorage.token

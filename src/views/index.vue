@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/rankList" class="icon rank-list"></router-link>
-    <router-link to="/xiaoxi" class="icon xiao-xi"></router-link>
+    <router-link to="/xiaoxi" :class="[{'tong-zhi' : tongzhi},'xiao-xi','icon']"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
       <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
@@ -37,6 +37,14 @@
     right: 0.533rem;
     background-size: 0.64rem 0.453rem;
     background-image: url(../assets/images/xinf@2x.png);
+  }
+  .tong-zhi::after{
+    color:red;
+    font-size: 72px;
+    content: ".";
+    position: relative;
+    left: 0.8rem;
+    bottom: 0.6rem;
   }
   .index-bg{
     width: 10rem;
@@ -79,6 +87,7 @@
     width: 1.693rem;
     height: 0.92rem;
     position: absolute;
+    z-index: 99;
     bottom: 0.573rem;
     right: 0.533rem;
     font-size: 30px;
@@ -114,7 +123,8 @@
       return {
         night:true,
         user:'',
-        animate:false
+        animate:false,
+        tongzhi:true
       }
     },
     methods:{

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="back-wrap">
-      <router-link to = '/'></router-link>
+      <router-link to = '/index'></router-link>
       <p>点亮你的小星星</p>
     </div>
     <div class="base">
@@ -44,7 +44,7 @@
     </footer>
     <div class="shadow" v-show="tip" @click="changeTip">
       <div class="tip-box">
-        请完善个人资料！
+        {{tiptext}}
       </div>
     </div>
     <div class="shadow" v-if="select != ''">
@@ -377,6 +377,7 @@
         ],
         starword: '',
         tip:false,
+        tiptext:'请完善个人资料！',
         select: ''
       } 
     },
@@ -399,7 +400,8 @@
           }
           this.$http.post('http://39.106.219.21:3000/api/setinfo',data).then((res)=>{
             if(res.body.code == 0){
-              this.global = res.body.data
+              window.localStorage.global = JSON.stringify(res.body.data)
+              this.$router.push('/user')
             }
             else{
               this.$router.push('/')
