@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="biaoqian">
-      <p v-for="item in user.label">{{item}}</p>
+      <p v-for="item in user.label">{{item.bqname}}</p>
     </div>
   </div>
 </template>
