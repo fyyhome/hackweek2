@@ -343,36 +343,36 @@
         zdybiaoqian:'',
         biaoqian: [
           {
-            bqname:'汪星人',
-            status:false
+            "bqname":'汪星人',
+            "status":false
           },
           {
-            bqname:'女神',
-            status:false
+            "bqname":'女神',
+            "status":false
           },
           {
-            bqname:'长腿欧巴',
-            status:false
+            "bqname":'长腿欧巴',
+            "status":false
           },
           {
-            bqname:'懒癌患者',
-            status:false
+            "bqname":'懒癌患者',
+            "status":false
           },
           {
-            bqname:'二次元',
-            status:false
+            "bqname":'二次元',
+            "status":false
           },
           {
-            bqname:'萌萌哒',
-            status:false
+            "bqname":'萌萌哒',
+            "status":false
           },
           {
-            bqname:'民谣',
-            status:false
+            "bqname":'民谣',
+            "status":false
           },
           {
-            bqname:'不吃肉不能活',
-            status:false
+            "bqname":'不吃肉不能活',
+            "status":false
           }
         ],
         starword: '',
@@ -398,6 +398,7 @@
             starword: this.starword,
             label: label
           }
+          console.log(data)
           this.$http.post('http://39.106.219.21:3000/api/setinfo',data).then((res)=>{
             if(res.body.code == 0){
               window.localStorage.global = JSON.stringify(res.body.data)
@@ -466,8 +467,8 @@
         else{
           if(this.zdybiaoqian != ''){
             this.biaoqian.push({
-              bqname: this.zdybiaoqian,
-              status: true
+              "bqname": this.zdybiaoqian,
+              "status": true
             })
           }
         }

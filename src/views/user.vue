@@ -43,8 +43,6 @@
       }
     },
     created(){
-      console.log(window.localStorage.global)
-      console.log(JSON.parse(window.localStorage.global))
       this.userId = JSON.parse(window.localStorage.global)
 
     }

@@ -5,13 +5,13 @@
       <p>我的消息</p>
     </div>
     <div class="xiaoxi-list">
-      <div class="xiaoxikuang" v-for=" item in list">
+      <div class="xiaoxikuang" v-for="item in list">
         <div>
-          <img src="../assets/images/nvtub@2x.png">
+          <img :src="item.chatAvatar">
         </div>
         <div>
-          <p>“<span>胖虎</span>”摘下了你的小星星，浩瀚星海中相遇不易的，和他打声招呼吧！</p>
-          <p v-show="false">嘿！你的小星星“<span>静香</span>”觉得自己不是最适合你的守护者，决定再次出发，现在你也可以去寻找你的小星星啦！</p>
+          <p v-show="item.type == 'PICKED'">“<span>{{item.chatStarname}}</span>”摘下了你的小星星，浩瀚星海中相遇不易的，和他打声招呼吧！</p>
+          <p v-show="item.type == 'ABANDON'">嘿！你的小星星“<span>{{item.chatStarname}}</span>”觉得自己不是最适合你的守护者，决定再次出发，现在你也可以去寻找你的小星星啦！</p>
           <h6>{{item.date}}</h6>
         </div>
       </div>
@@ -97,14 +97,15 @@
   export default{
     data(){
       return {
-        list:[
-          {
-            date:'2222/2/2 02:22',
-            type: 1,
-            userimg:null
-          }
-        ]
+        list:''
       }
+    },
+    created(){
+      this.$http.get('http://116.196.123.49:8060/star/api/message').then((res)=>{
+        if(res.body.code == 0){
+          this.list = res.body.data
+        }
+      })
     }
   }
 </script>

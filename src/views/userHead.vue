@@ -91,7 +91,8 @@
         gendersrc:''
       }
     },
-    mounted(){
+    created(){
+      console.log(this.user)
       if(this.user.gender == '男'){
         this.gendersrc = true
       }

@@ -3,7 +3,7 @@
     <router-link to="/rankList" class="icon rank-list"></router-link>
     <router-link to="/xiaoxi" :class="[{'tong-zhi' : tongzhi},'xiao-xi','icon']"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
-      <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
+      <router-link :to="{name:'ShouHu',params: { id: user[0]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[1]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[2]}}"></router-link>
       <router-link :to="{name:'ShouHu',params: { id: user[3]}}"></router-link>
@@ -124,20 +124,30 @@
         night:true,
         user:'',
         animate:false,
-        tongzhi:true
+        tongzhi:false
       }
     },
     methods:{
       getTime(){
         let t = new Date()
         let hour = t.getHours()
-        console.log(hour)
         if(hour >= 19 || hour <= 7){
           this.night = true
         }
         else{
           this.night = false
         }
+        this.$http.get('http://116.196.123.49:8060/star/api/messageNumber').then((res)=>{
+          console.log(res)
+          if(res.body.code === 0){
+            if(res.body.data == 0){
+              this.tongzhi = false
+            }
+            else{
+              this.tongzhi =true
+            }
+          }
+        })
       },
       refresh(){
         this.animate = true
@@ -145,7 +155,7 @@
         setTimeout(function(){
           that.animate = false
         },1500)
-        this.$http.get('http://u.test.myhoster.top:8090/api/stars').then((res)=>{
+        this.$http.get('http://116.196.123.49:8060/star/api/stars').then((res)=>{
           if(res.body.code === 0){
             this.user = res.body.data
           }
@@ -156,10 +166,11 @@
         })
       }
     },
-    mounted(){
+    created(){
       this.getTime()
       setInterval(this.getTime,60000)
-      this.$http.get('http://u.test.myhoster.top:8090/api/stars').then((res)=>{
+      this.$http.get('http://116.196.123.49:8060/star/api/stars').then((res)=>{
+        console.log(res)
         if(res.body.code === 0){
           this.user = res.body.data
         }

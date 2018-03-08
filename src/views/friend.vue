@@ -2,7 +2,7 @@
   <div>
     <user-head :id="userId"></user-head>
     <router-link to="/userMessage"></router-link>
-    <p class="xingyu">拉埃绿绿绿绿绿绿绿绿绿绿绿绿</p>
+    <p class="xingyu">{{userId.starword}}</p>
     <biao-qian :id="userId"></biao-qian>
     <button class="fangqi" @click="fangqiFn">放弃</button>
     <div class="overlay" v-show="overlay">
@@ -124,13 +124,22 @@
         this.overlay = true;
       },
       resureFn(){
-        this.$http.post('',data).then((res)=>{
-
+        this.$http.post('http://116.196.123.49:8060/star/api/abandon').then((res)=>{
+          if(res.body.code === 0){
+            this.$router.push("/index")
+          }
         })
       },
       cancleFn(){
         this.overlay = false
       }
+    },
+    created(){
+      this.$http.get('http://116.196.123.49:8060/star/api/star').then((res)=>{
+        if(res.body.code === 0){
+          this.userId = res.body.data
+        }
+      })
     }
   }
 </script>

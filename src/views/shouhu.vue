@@ -97,7 +97,8 @@
         }
       }
     },
-    mounted(){
+    created(){
+      console.log(this.$route.params.id)
       if(this.userId == undefined){
         //this.$router.push('/index')
       }

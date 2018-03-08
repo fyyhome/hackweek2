@@ -83,8 +83,8 @@
   export default{
     data(){
       return {
-        username:null,
-        password:null,
+        username:'',
+        password:'',
         tip:false
       }
     },
@@ -105,7 +105,7 @@
                 this.$router.push('/index')
               }
               else{
-                this.$router.push('/userMessage')
+                this.$router.push('/yindao')
               }
             }
             else{

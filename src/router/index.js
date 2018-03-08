@@ -41,7 +41,6 @@ export default new Router({
       component: XiaoXi
     },
     {
-      // path: '/shouhu',
       path: '/shouhu/:id',
       name: 'ShouHu',
       component: ShouHu

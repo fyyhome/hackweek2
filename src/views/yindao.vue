@@ -22,7 +22,7 @@
   export default{
     methods:{
       resure(){
-        this.$router.push('/index')
+        this.$router.push('/userMessage')
       }
     }
   }
