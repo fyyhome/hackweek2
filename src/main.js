@@ -13,7 +13,6 @@ Vue.http.interceptors.push((request,next)=>{
   // let token = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiIyIn0.irpyg5nYoOcxTJvPS69aeFAN0LnVV7VxbjGO0YLWcJs'
   if(token){
     request.headers.set('Authorization',token)
-    console.log(request.headers)
   }
   next((res)=>{
     return res

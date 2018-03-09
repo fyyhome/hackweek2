@@ -80,7 +80,7 @@
     },
     methods:{
       shouhuFn(){
-        this.$http.post('http://u.test.myhoster.top:8090/api/star'+ '?' + 'chatID=' + this.userId.chatID).then((res)=>{
+        this.$http.post('http://116.196.123.49:8060/star/api/star'+ '?' + 'chatID=' + this.userId.chatID).then((res)=>{
           if(res.code === 0){
             this.overlay = true
           }

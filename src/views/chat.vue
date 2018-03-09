@@ -189,9 +189,14 @@
       }
     },
     created(){
-      this.$http.get('').then((res)=>{
+      this.$http.get('http://116.196.123.49:8060/star/api/chatInfo').then((res)=>{
         if(res.body.code == 0){
-          this.data = res.body.data
+          if(res.body.data.starname2 === ''){
+            this.$router.push('/index')
+          }
+          else{
+            this.data = res.body.data
+          }
         }
         else{
           this.$router.push('/index')

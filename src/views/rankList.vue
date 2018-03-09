@@ -190,7 +190,7 @@
       }
     },
     created(){
-      this.$http.get('http://u.test.myhoster.top:8090/api/rankChart').then((res)=>{
+      this.$http.get('http://116.196.123.49:8060/star/api/rankChart').then((res)=>{
         if(res.body.code == 0){
           this.list = res.body.data
           this.listone = this.list[0]
