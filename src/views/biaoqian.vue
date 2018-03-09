@@ -21,7 +21,7 @@
     padding: 0.278rem;
     margin: 0.139rem;
     border-radius: 0.267rem;
-    border: solid 0.027rem #5677fc;
+    border: solid 1px #5677fc;
     font-size: 0.48rem;
     line-height: 1;
     color: #5677fc;

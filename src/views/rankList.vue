@@ -59,9 +59,9 @@
   .head > p{
     display: inline-block;
     float: right;
-    font-size: 36px;
+    font-size: 18px;
     color: #ffffff;
-    line-height: 1;
+    line-height: 0.533rem;
     margin-top: 0.32rem;
     margin-right: 4.293rem;
   }
@@ -103,7 +103,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 32px;
+    font-size: 16px;
     color: #ffffff;
   }
   .msg > p{
@@ -166,17 +166,17 @@
     display: inline-block;
     width: 5.3rem;
     max-width: 5.3rem;
-    font-size: 32px;
+    font-size: 16px;
     color: #565656;
   }
   .rankspan{
-    font-size: 32px;
+    font-size: 16px;
     color: #ffffff;
     align-self: flex-start;
     padding: 0.107rem 0.11rem;
   }
   .days > p{
-    font-size: 32px;
+    font-size: 16px;
     color: #565656;
   }
 </style>

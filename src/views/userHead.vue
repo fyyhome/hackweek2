@@ -66,7 +66,7 @@
   span{
     display: block;
     color: rgb(86,86,86);
-    font-size: 50px;
+    font-size: 25px;
     margin-top: 1.847rem;
   }
   .user-name div{

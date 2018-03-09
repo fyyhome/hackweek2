@@ -29,7 +29,7 @@
     text-align: center;
     padding-top: 0.267rem;
     padding-bottom: 0.267rem;
-    font-size: 30px;
+    font-size: 15px;
     color: #989898;
     vertical-align: center;
   }
@@ -78,12 +78,12 @@
  }
  .lightbox > div > h2{
   display: inline-block;
-  font-size: 36px;
+  font-size: 18px;
   color: #565656;
   margin: 0.547rem 0;
  }
  .lightbox > div > p{
-  font-size: 34px;
+  font-size: 17px;
   color: #989898;
  }
  .lightbox > div > p > span{
@@ -95,7 +95,7 @@
   background-color: #ffffff;
   border-radius: 0.2rem;
   color: #5677fc;
-  font-size: 30px;
+  font-size: 15px;
  }
  .button-right{
   margin-left: 3.6rem;

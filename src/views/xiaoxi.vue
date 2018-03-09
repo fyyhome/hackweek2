@@ -24,23 +24,21 @@
     width: 10rem;
     height: 1.173rem;
     background-color: #5677fc;
+    text-align: center;
   }
   .headdiv a{
     display: inline-block;
     width: 0.293rem;
     height: 0.533rem;
-    float: left;
-    margin: 0.293rem 0.533rem;
+    position: absolute;
+    top: 0.293rem;
+    left: 0.533rem;
     background-image: url(../assets/images/fanhui@2x.png);
   }
   .headdiv p{
-    display: inline-block;
-    margin-top: 0.293rem;
-    margin-left: calc(50% - 2.349rem);
-    height: 0.533rem;
-    font-size: 36px;
+    font-size: 18px;
     color: #ffffff;
-    line-height: 1;
+    line-height: 1.173rem;
   }
   .xiaoxi-list{
     width: 10rem;
@@ -79,11 +77,11 @@
     margin-top: 0.52rem;
   }
   .xiaoxikuang div:nth-child(2) > p{
-    font-size: 32px;
+    font-size: 16px;
     color: #565656;
   }
   .xiaoxikuang div:nth-child(2) > h6{
-    font-size: 24px;
+    font-size: 12px;
     color: #989898;
     align-self: flex-end;
     margin: 0.533rem 0;

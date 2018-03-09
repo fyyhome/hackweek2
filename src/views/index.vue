@@ -42,7 +42,7 @@
   }
   .tong-zhi::after{
     color:red;
-    font-size: 72px;
+    font-size: 36px;
     content: ".";
     position: relative;
     left: 0.8rem;
@@ -92,7 +92,7 @@
     z-index: 99;
     bottom: 0.573rem;
     right: 0.533rem;
-    font-size: 30px;
+    font-size: 0.4rem;
     background-color: rgba(255,255,255,0.3);
     border-radius: 0.267rem;
     color: #ffffff;

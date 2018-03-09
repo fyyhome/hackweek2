@@ -15,7 +15,7 @@
     text-align: center;
     padding-top: 0.267rem;
     padding-bottom: 0.267rem;
-    font-size: 30px;
+    font-size: 15px;
     color: #989898;
     vertical-align: center;
   }

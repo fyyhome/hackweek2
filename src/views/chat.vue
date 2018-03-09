@@ -31,7 +31,7 @@
   .cin > input{
     width: 7.08rem;
     height: 1.04rem;
-    font-size: 32px;
+    font-size: 16px;
     padding-left: 0.133rem;
     color: #565656;
     overflow-y: scroll;
@@ -43,7 +43,7 @@
     height: 1.04rem;
     background-color: #5677fc;
     border-radius: 0.2rem;
-    font-size: 32px;
+    font-size: 16px;
     color: #ffffff;
   }
   .headdiv{
@@ -56,7 +56,7 @@
   }
   .headdiv > p{
     margin:auto;
-    font-size: 36px;
+    font-size: 16px;
     line-height: 1;
     color: #ffffff;
   }
@@ -73,7 +73,7 @@
   }
   .headdiv > div p{
     margin:auto;
-    font-size: 36px;
+    font-size: 18px;
     padding: 2px 5px;
     color: #ffffff;
   }
@@ -108,7 +108,7 @@
     max-width: 6.053rem;
     position: relative;
     background-color: #ffffff;
-    font-size: 32px;
+    font-size: 16px;
     left: 0.267rem;
     top: 0.5rem;
     padding: 0.267rem;
@@ -120,7 +120,7 @@
     max-width: 6.053rem;
     position: relative;
     background-color: #ffffff;
-    font-size: 32px;
+    font-size: 16px;
     right: 0.267rem;
     top: 0.5rem;
     padding: 0.267rem;
@@ -196,13 +196,13 @@
           }
           else{
             this.data = res.body.data
+            this.initial()
           }
         }
         else{
           this.$router.push('/index')
         }
       })
-      this.initial()
     }
   }
 </script>

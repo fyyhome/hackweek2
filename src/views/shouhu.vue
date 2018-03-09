@@ -45,7 +45,7 @@
   padding-top: 2rem;
  }
  .lightbox span{
-  font-size: 36px;
+  font-size: 18px;
   color: rgb(86,86,86);
  }
  .lightbox button{
@@ -53,7 +53,7 @@
   height: 0.8rem;
   background-color: transparent;
   border-radius: 0.2rem;
-  font-size: 30px;
+  font-size: 15px;
   color: #5677fc;
   margin-top: 1.8rem;
   margin-left: 5.6rem;

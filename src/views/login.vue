@@ -41,11 +41,10 @@
   }
   .login-div p{
     width: 7.333rem;
-    height: 36px;
-    line-height: 36px;
+    height: 0.48rem;
     color: rgba(255,255,255,0.5);
     text-align: left;
-    margin-bottom: 0.706rem;
+    margin-bottom: 0.306rem;
   }
   .login-div span{
     width: 7.333rem;
@@ -57,10 +56,10 @@
   }
   .login-div li input{
     width: 7.333rem;
-    height: 55px;
-    line-height: 55px;
+    height: 0.973rem;
+    line-height: 0.973rem;
     margin-bottom: 0.56rem;
-    font-size: 36px;
+    font-size: 0.48rem;
     color: #ffffff;
     background: transparent;
     border-bottom: solid 1px #efeef2; 

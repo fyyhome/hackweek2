@@ -87,7 +87,7 @@
     left: 0.533rem;
   }
   .back-wrap p{
-    font-size: 36px;
+    font-size: 18px;
     color: #ffffff;
     line-height: 1.173rem;
   }
@@ -100,6 +100,7 @@
   }
   .base-wrap{
     width: 10rem;
+    position: relative;
     display: flex;
     align-items: center;
   }
@@ -115,12 +116,15 @@
     height: 1.173rem;
     padding-top: 0.2rem;
   }
+  .sex button{
+    margin-top: 0.1rem;
+  }
   .word{
     height: 1.707rem;
     box-shadow: 0 0.25rem 2px #f1f1f1, 0 -0.25rem 2px rgb(241,241,241);
   }
   .base-wrap p{
-    font-size: 32px;
+    font-size: 16px;
     line-height: 1;
     color: #565656;
     margin-left: 0.52rem;
@@ -131,11 +135,13 @@
     background-color: #ffffff;
     background-image: url(../assets/images/jiantouyou@2x.png);
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     right: 0.533rem;
   }
   .name font,.sex font{
-    font-size: 26px;
-    line-height: 1;
+    font-size: 13px;
+    line-height: 1.173rem;
     color: #989898;
     position: absolute;
     right: 1.027rem;
@@ -147,15 +153,20 @@
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 26px;
+    font-size: 13px;
     color: #989898;
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     right: 1.027rem;
   }
   .head div{
     width: 1.44rem;
     height: 1.44rem;
-    margin-left: 6.173rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.027rem;
     background-color: #f1f1f1;
     border-radius: 50%;
     background-size: auto;
@@ -173,7 +184,7 @@
     background-color: rgb(241,241,241);
   }
   .biao-qian p{
-    font-size: 24px;
+    font-size: 12px;
     line-height: 2.5;
     color: #989898;
     margin-left: 0.533rem;
@@ -213,7 +224,7 @@
     height: 1rem;
     background: transparent;
     color: #565656;
-    font-size: 36px;
+    font-size: 18px;
     line-height: 1rem;
     border-radius: 0.267rem;
     border: 1px solid #dfdfdd;
@@ -253,7 +264,7 @@
     height: 5.467rem;
     background-color: #ffffff;
     border-radius: 0.4rem;
-    font-size: 36px;
+    font-size: 18px;
     color:rgb(86,86,86);
     padding-left: 0.5rem;
     z-index: 1;
@@ -304,7 +315,7 @@
     bottom: 0.534rem;
     background: white;
     color: #5677fc;
-    font-size: 36px;
+    font-size: 18px;
   }
   .check-box button:hover{
     background-color: #f1f1f1;
@@ -317,7 +328,7 @@
   }
   input[type="text"]{
     margin-top: 0.8rem;
-    font-size: 34px;
+    font-size: 17px;
     color: rgb(152,152,152); 
   }
   .tip-box{
@@ -325,7 +336,7 @@
     height: 5.467rem;
     background-color: #ffffff;
     border-radius: 0.4rem;
-    font-size: 36px;
+    font-size: 18px;
     color:rgb(86,86,86);
     display: flex;
     justify-content: center;
