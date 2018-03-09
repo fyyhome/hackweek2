@@ -9,7 +9,7 @@
       <div class="lightbox">
         <div>
           <h2>星轨</h2>
-          <p><span>2月2日 18.36</span><br>你成为他的守护者<br>一起度过了<span>15</span>天奇妙的时光</p>
+          <p><span>{{userId.date}}</span><br>你成为他的守护者<br>一起度过了<span>{{userId.days}}</span>天奇妙的时光</p>
         </div>
         <div>
           <p>点击放弃后，这颗星星永远不会出现在你的星控中，晚上7点后才能选择你的星星，确定放弃吗？</p>
