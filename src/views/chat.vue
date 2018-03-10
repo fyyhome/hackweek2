@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="headdiv">
+    <div class="chat_head">
       <router-link to="/index"></router-link>
       <p>{{data.starname2}}</p>
-      <div>
+      <div @click="toFriend">
         <p>{{data.days}}</p>
         <img src="../assets/images/yellowstars@2x.png" alt>
       </div>
@@ -18,7 +18,9 @@
   
 </template>
 
-<style scoped>
+
+<style>
+/*scoped属性会使js动态添加的dom节点的样式无效，此处不添加该属性*/
   .cin{
     width: 10rem;
     height: 1.307rem;
@@ -46,7 +48,7 @@
     font-size: 16px;
     color: #ffffff;
   }
-  .headdiv{
+  .chat_head{
     width: 10rem;
     height: 1.173rem;
     background-color: #5677fc;
@@ -54,19 +56,19 @@
     flex-direction: row;
     align-items: center;
   }
-  .headdiv > p{
+  .chat_head > p{
     margin:auto;
     font-size: 16px;
     line-height: 1;
     color: #ffffff;
   }
-  .headdiv > a{
+  .chat_head > a{
     width: 0.293rem;
     height: 0.533rem;
     margin: 0.32rem 0.533rem;
     background-image: url(../assets/images/fanhui@2x.png);
   }
-  .headdiv > div{
+  .chat_head > div{
     display: flex;
     width: 0.92rem;
     position: relative;
@@ -74,13 +76,13 @@
     margin: 0.32rem 0.219rem;
     flex-direction: row;
   }
-  .headdiv > div p{
+  .chat_head > div p{
     margin:auto;
     font-size: 18px;
     padding: 2px 5px;
     color: #ffffff;
   }
-  .headdiv > div > img{
+  .chat_head > div > img{
     width: 0.547rem;
     height: 0.533rem;
   }
@@ -145,6 +147,9 @@
       }
     },
     methods:{
+      toFriend(){
+        this.$router.push('/friend')
+      },
       appendChatDiv(type , msg){
         let parent = document.getElementById('chatbg')
         let rec = document.createElement('div')

@@ -141,10 +141,13 @@
   }
   .name font,.sex font{
     font-size: 13px;
-    line-height: 1;
+    line-height: 1.173rem;
     color: #989898;
     position: absolute;
     right: 1.027rem;
+  }
+  .sex font{
+    padding-bottom: 0.1rem;
   }
   .word div{
     display: inline-flex;
@@ -409,7 +412,6 @@
             starword: this.starword,
             label: label
           }
-          console.log(data)
           this.$http.post('http://39.106.219.21:3000/api/setinfo',data).then((res)=>{
             if(res.body.code == 0){
               window.localStorage.global = JSON.stringify(res.body.data)

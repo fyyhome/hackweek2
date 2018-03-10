@@ -44,7 +44,7 @@
     },
     created(){
       this.userId = JSON.parse(window.localStorage.global)
-
+      console.log(this.userId)
     }
   }
 </script>

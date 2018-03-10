@@ -1,15 +1,15 @@
 <template>
   <div>
-    <user-head :id="userId"></user-head>
+    <user-head :id="user"></user-head>
     <router-link to="/userMessage"></router-link>
-    <p class="xingyu">{{userId.starword}}</p>
-    <biao-qian :id="userId"></biao-qian>
+    <p class="xingyu">{{user.starword}}</p>
+    <biao-qian :id="user"></biao-qian>
     <button class="fangqi" @click="fangqiFn">放弃</button>
     <div class="overlay" v-show="overlay">
       <div class="lightbox">
         <div>
           <h2>星轨</h2>
-          <p><span>{{userId.date}}</span><br>你成为他的守护者<br>一起度过了<span>{{userId.days}}</span>天奇妙的时光</p>
+          <p><span>{{user.date}}</span><br>你成为他的守护者<br>一起度过了<span>{{user.days}}</span>天奇妙的时光</p>
         </div>
         <div>
           <p>点击放弃后，这颗星星永远不会出现在你的星控中，晚上7点后才能选择你的星星，确定放弃吗？</p>
@@ -74,7 +74,6 @@
   width: 6.56rem;
   height: 4.093rem;
   margin: auto;
-  border-bottom: solid 1px #dfdfdd;
  }
  .lightbox > div > h2{
   display: inline-block;
@@ -85,6 +84,9 @@
  .lightbox > div > p{
   font-size: 17px;
   color: #989898;
+ }
+ .lightbox div:last-child > p{
+  border-top: 1px solid #dfdfdd;
  }
  .lightbox > div > p > span{
   color: #5677fc;
@@ -115,9 +117,17 @@
     },
     data(){
       return {
-        userId:'',
+        user:'',
         overlay: false
       }
+    },
+    created(){
+      this.$http.get('http://116.196.123.49:8060/star/api/star').then((res)=>{
+        if(res.body.code === 0){
+          this.user = res.body.data
+          console.log(this.user)
+        }
+      })
     },
     methods:{
       fangqiFn(){
@@ -133,13 +143,6 @@
       cancleFn(){
         this.overlay = false
       }
-    },
-    created(){
-      this.$http.get('http://116.196.123.49:8060/star/api/star').then((res)=>{
-        if(res.body.code === 0){
-          this.userId = res.body.data
-        }
-      })
     }
   }
 </script>

@@ -11,7 +11,6 @@
       <span>{{user.starname}}</span>
       <div :class="{'nan': gendersrc, 'nv' : !gendersrc}">
       </div>
-      <!-- <img :src="gendersrc" alt> -->
     </div>
   </div>
 </template>
@@ -86,11 +85,16 @@
     props:['id'],
     data(){
       return {
+        gendersrc:'',
         user:this.id,
-        gendersrc:''
+        data_status:false
       }
     },
     created(){
+      if(this.user != null){
+        this.data_status =true
+      }
+      console.log(this.id)
       if(this.user.gender == '男'){
         this.gendersrc = true
       }
