@@ -2,7 +2,7 @@
   <div>
     <div class="headdiv">
       <router-link to="/index"></router-link>
-      <p>{{data.starname1}}</p>
+      <p>{{data.starname2}}</p>
       <div>
         <p>{{data.days}}</p>
         <img src="../assets/images/yellowstars@2x.png" alt>
@@ -18,7 +18,7 @@
   
 </template>
 
-<style>
+<style scoped>
   .cin{
     width: 10rem;
     height: 1.307rem;
@@ -68,7 +68,10 @@
   }
   .headdiv > div{
     display: flex;
-    margin: 0.32rem 0.533rem;
+    width: 0.92rem;
+    position: relative;
+    right: 0.32rem;
+    margin: 0.32rem 0.219rem;
     flex-direction: row;
   }
   .headdiv > div p{
@@ -76,6 +79,10 @@
     font-size: 18px;
     padding: 2px 5px;
     color: #ffffff;
+  }
+  .headdiv > div > img{
+    width: 0.547rem;
+    height: 0.533rem;
   }
   .chat{
     width: 10rem;
@@ -132,7 +139,7 @@
   export default{
     data(){
       return {
-        websocket:null,
+        socket:null,
         msg:'',
         data:''
       }
@@ -143,20 +150,24 @@
         let rec = document.createElement('div')
         let imgDiv = document.createElement('div')
         let img = document.createElement('img')
+        let that = this
         imgDiv.setAttribute('data-attr',msg)
         if(type == 'recive'){
           rec.className = 'recive'
           img.src = this.data.avatar2
           imgDiv.onclick = function(){
-            this.$router.push('/friend')
+            that.$router.push('/friend')
           }
         }
         else if(type == 'send'){
           rec.className = 'send'
           img.src = this.data.avatar1
           imgDiv.onclick = function(){
-            this.$router.push('/user')
+            that.$router.push('/user')
           }
+        }
+        else{
+          return
         }
         parent.appendChild(rec)
         rec.appendChild(imgDiv)

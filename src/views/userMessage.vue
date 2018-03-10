@@ -141,7 +141,7 @@
   }
   .name font,.sex font{
     font-size: 13px;
-    line-height: 1.173rem;
+    line-height: 1;
     color: #989898;
     position: absolute;
     right: 1.027rem;

@@ -98,8 +98,16 @@
     color: #ffffff;
   }
   @keyframes shuaxin{
-    from {transform:rotate(0deg);}
-    to {transform: rotate(360deg);}
+    from {
+      -webkit-transform:rotate(0deg);
+      -moz-transform:rotate(0deg);
+      transform:rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
   .animation-div{
     width: 1.6rem;
@@ -109,6 +117,12 @@
     top: calc(45% - 0.8rem);
     left: calc(50% - 0.8rem);
     background-image: url(../assets/images/shuaxin.png);
+    -webkit-animation-name: shuaxin;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 3;
+    -moz-animation-name: shuaxin;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-iteration-count: 3;
     animation-name: shuaxin;
     animation-duration: 0.5s;
     animation-iteration-count: 3;
@@ -133,7 +147,7 @@
       getTime(){
         let t = new Date()
         let hour = t.getHours()
-        if(hour >= 19 || hour <= 7){
+        if(hour >= 16 || hour <= 7){
           this.night = true
         }
         else{

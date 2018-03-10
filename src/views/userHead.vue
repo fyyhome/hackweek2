@@ -21,12 +21,11 @@
     width: 8rem;
     margin: auto;
     text-align: center;
-    /*border-bottom: solid 1px #dfdfdd;*/
   }
   .big-head{
     width: 10rem;
     height: 4.8rem;
-    background-color: #5677fc;
+    background-color: transparent;
     position: relative;
   }
   .bg-blur{

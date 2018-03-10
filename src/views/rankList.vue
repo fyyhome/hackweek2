@@ -23,8 +23,8 @@
       <div v-for="(item,index) in list">
         <span class="rankspan">{{index+2}}</span>
         <div class="headicon">
-          <img src="item.avatar1" alt>
-          <img src="item.avatar2" alt>
+          <img :src="item.avatar1" alt>
+          <img :src="item.avatar2" alt>
         </div>
         <p>{{item.starname1}}&nbsp;&&nbsp;{{item.starname2}}</p>
         <div class="days daysflex">
@@ -185,7 +185,7 @@
   export default{
     data(){
       return {
-        list:[],
+        list:'',
         listone:''
       }
     },
