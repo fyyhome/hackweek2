@@ -195,6 +195,7 @@
   .biao-qian ul{
     margin-left: 0.533rem;
     height: 5.067rem;
+    overflow-y: auto;
   }
   .biao-qian ul li{
     float: left;
@@ -438,13 +439,17 @@
       changeTip(){
         this.tip = false
       },
-      changeStatus(index){
+      getCount(){
         let count = 0
         for(let item of this.biaoqian){
           if(item.status === true){
             count += 1
           }
         }
+        return count
+      },
+      changeStatus(index){
+        let count = this.getCount()
         if(count < 5){
           this.biaoqian[index].status = !this.biaoqian[index].status
         }
@@ -453,21 +458,26 @@
         }
       },
       selectFn(title){
-        this.select = title
-        if(this.select === '昵称'){
+        if(title === '昵称'){
+          this.select = title
           setTimeout(function(){
             document.getElementById('username').focus()
           },200)
         }
-        else if(this.select === '星语'){
+        else if(title === '星语'){
+          this.select = title
           setTimeout(function(){
             document.getElementById('starword').focus()
           },200)
         }
-        else if(this.select === '添加标签'){
-          setTimeout(function(){
-            document.getElementById('zdybiaoqian').focus()
-          },200)
+        else if(title === '添加标签'){
+          let count = this.getCount()
+          if(count < 5){
+            this.select = title
+            setTimeout(function(){
+              document.getElementById('zdybiaoqian').focus()
+            },200)
+          }
         }
       },
       resureFn(){
@@ -483,6 +493,7 @@
               "bqname": this.zdybiaoqian,
               "status": true
             })
+            this.zdybiaoqian = ''
           }
         }
         this.select = ''  

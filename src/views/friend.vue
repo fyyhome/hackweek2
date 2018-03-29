@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="data_status">
     <user-head :id="user"></user-head>
     <router-link to="/userMessage"></router-link>
     <p class="xingyu">{{user.starword}}</p>
@@ -118,14 +118,15 @@
     data(){
       return {
         user:'',
-        overlay: false
+        overlay: false,
+        data_status:false
       }
     },
     created(){
       this.$http.get('http://116.196.123.49:8060/star/api/star').then((res)=>{
         if(res.body.code === 0){
           this.user = res.body.data
-          console.log(this.user)
+          this.data_status = true
         }
       })
     },

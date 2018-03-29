@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="overlay" v-show="overlay_status">
+      你还没守护那个Ta哦！
+    </div>
     <router-link to="/rankList" class="icon rank-list"></router-link>
     <router-link to="/xiaoxi" :class="[{'tong-zhi' : tongzhi},'xiao-xi','icon']"></router-link>
     <div :class="[night? 'night': 'day','index-bg']">
@@ -14,11 +17,26 @@
         </div>
       </div>
     </div>
-    <footer-nav></footer-nav>
+    <footer-nav @getInfo="getChatInfo"></footer-nav>
   </div>
 </template>
 
 <style scoped>
+  .overlay{
+    width: 4.5rem;
+    height: 4.5rem;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-2.25rem,-2.25rem);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #565656;
+    font-size: 0.36rem;
+  }
   .icon{
     display: inline-block;
     position: absolute;
@@ -140,7 +158,8 @@
         night:true,
         user:'',
         animate:false,
-        tongzhi:false
+        tongzhi:false,
+        overlay_status:false
       }
     },
     methods:{
@@ -177,6 +196,23 @@
           else{
             this.animate = false
             alert('网络错误！')
+          }
+        })
+      },
+      getChatInfo(){
+        this.$http.get('http://116.196.123.49:8060/star/api/chatInfo').then((res)=>{
+          if(res.body.code == 10){
+            this.overlay_status = true
+            let that = this
+            setTimeout(()=>{
+              that.overlay_status = false
+            },1000)
+          }
+          else if(res.body.code === 0){
+            this.$router.push('/chat')
+          }
+          else{
+            return 
           }
         })
       }

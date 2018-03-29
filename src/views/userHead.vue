@@ -86,15 +86,10 @@
     data(){
       return {
         gendersrc:'',
-        user:this.id,
-        data_status:false
+        user:this.id
       }
     },
     created(){
-      if(this.user != null){
-        this.data_status =true
-      }
-      console.log(this.id)
       if(this.user.gender == '男'){
         this.gendersrc = true
       }

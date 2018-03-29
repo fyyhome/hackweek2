@@ -195,11 +195,10 @@
           that.appendChatDiv('recive',res.msg)
         }
         this.socket.onerror = function(evt){
-          alert('网络错误！')
+          console.log('网络错误！')
           document.getElementById('sendMsg').disabled = true
         }
         this.socket.onclose = function(evt){
-          alert('网络错误！')
           document.getElementById('sendMsg').disabled = true
         }
       }
